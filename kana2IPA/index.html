@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f6f1ea">
+    <title>Kana to IPA Converter</title>
+    <script src="https://unpkg.com/wanakana"></script>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.cdnfonts.com/css/cmu-serif" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Charis+SIL:wght@400;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="../favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+</head>
+<body>
+    <main class="page tool tool--jp">
+        <header class="hero">
+            <div class="hero__kicker">
+                <span class="hero__mark">YOU7N</span>
+                <span class="hero__slash">/</span>
+                <span class="hero__muted">tool</span>
+            </div>
+
+            <div class="tool__title">仮名から国際音声記号への変換器</div>
+            <div class="tool__subtitle">Convert Japanese kana to rōmaji and IPA.</div>
+        </header>
+
+        <section class="panel tool-panel" aria-label="Converter">
+            <div class="panel__head">
+                <h2 class="panel__title">Converter</h2>
+            </div>
+
+            <div class="tool-grid">
+                <div class="field">
+                    <label class="field__label" for="kanaInput">Input</label>
+                    <textarea id="kanaInput" placeholder="仮名入力 | Input kana" rows="4"></textarea>
+                </div>
+
+                <div class="tool-actions">
+                    <button class="pill pill--button tool-action" type="button" onclick="convertToRomaji(), convertToIPA()">Convert</button>
+                </div>
+
+                <div class="output-row">
+                    <div class="field">
+                        <label class="field__label" for="RomajiOutput">Rōmaji</label>
+                        <textarea id="RomajiOutput" placeholder="ローマ字 | Rōmaji" rows="4" readonly></textarea>
+                    </div>
+
+                    <div class="field">
+                        <label class="field__label" for="IPAoutput">IPA</label>
+                        <textarea id="IPAoutput" placeholder="国際音声記号 | IPA" rows="4" readonly></textarea>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+        
+        function convertToRomaji() {
+            const kanaInput = document.getElementById('kanaInput').value;
+            const RomajiOutput = wanakana.toRomaji(kanaInput);
+            document.getElementById('RomajiOutput').value = RomajiOutput;
+            return RomajiOutput;
+            console.log(kanaInput);
+            console.log(RomajiOutput);
+        }
+
+        function convertToIPA() {
+            var inputText = convertToRomaji('kanaInput');
+            var outputText = inputText.replace(/u/g, "ɯ").replace(/j/g, "dʑ").replace(/r/g, "ɺ").replace(/sh/g, "ɕ").replace(/ch/g, "tɕ");
+            outputText = outputText.replace(/tsɯ/g,"t͡sɯ").replace(/hi/g,"çi").replace(/fɯ/g,"ɸɯ");
+            outputText = outputText.replace(/kya/g,"kʲa").replace(/kyɯ/g,"kʲu").replace(/kyo/g,"kʲo");
+            outputText = outputText.replace(/ɕɯ/g,"ɕu");
+            outputText = outputText.replace(/nya/g,"nʲa").replace(/nyɯ/g,"nʲu").replace(/nyo/g,"nʲo");
+            outputText = outputText.replace(/hya/g,"hʲa").replace(/hyɯ/g,"hʲu").replace(/hyo/g,"hʲo");
+            outputText = outputText.replace(/mya/g,"mʲa").replace(/myɯ/g,"mʲu").replace(/myo/g,"mʲo");
+            outputText = outputText.replace(/ɺya/g,"ɺʲa").replace(/ɺyɯ/g,"ɺʲu").replace(/ɺyo/g,"ɺʲo");
+            outputText = outputText.replace(/ya/g,"ja").replace(/yɯ/g,"jɯ").replace(/yo/g,"jo");
+            outputText = outputText.replace(/a/g, "ɑ̈").replace(/e/g, "e̞").replace(/o/g,"o̞");
+            outputText = outputText.replace(/ɑ̈ɑ̈/g, "ɑ̈ː").replace(/e̞e̞/g, "e̞ː").replace(/ii/g,"iː").replace(/ɯɯ/g, "ɯː").replace(/uɯ/g,"uː");
+            outputText = outputText.replace(/o̞ɯ/g, "o̞ː").replace(/o̞o̞/g, "o̞ː");
+            document.getElementById("IPAoutput").value = outputText;
+            console.log(outputText);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>检测自己是什么物种</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input[type="text"] {
+            width: 200px;
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 5px 10px;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>检测自己是什么物种</h1>
+    <label for="species">请输入你的物种：</label>
+    <input type="text" id="species" placeholder="猫娘">
+    <button onclick="detectSpecies()">检测</button>
+    <div id="result"></div>
+
+    <script>
+        function detectSpecies() {
+            const speciesInput = document.getElementById('species').value.trim();
+            const resultDiv = document.getElementById('result');
+
+            if (speciesInput) {
+                resultDiv.textContent = `你是 ${speciesInput}`;
+            } else {
+                resultDiv.textContent = "你是 猫娘";
+            }
+        }
+    </script>
+</body>
+</html>
