@@ -178,7 +178,7 @@ function startTypingAnimation() {
             }
             toggle.setAttribute('aria-pressed', String(isPaused));
             toggle.setAttribute('aria-label', isPaused ? 'Resume greetings' : 'Pause greetings');
-            toggle.firstElementChild.textContent = isPaused ? '\u25b6' : '\u275a\u275a';
+            toggle.firstElementChild.textContent = isPaused ? '\u25b6\ufe0e' : '\u275a\u275a';
             heroHello?.classList.toggle('is-paused', isPaused);
         });
     }
